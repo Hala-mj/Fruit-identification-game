@@ -1,0 +1,199 @@
+/* Simple Expert System (fruit and vegetable identification game).  
+
+  
+
+   Start with ?- go. */  
+
+  
+
+go :- hypothesize(What_is_plant),  
+
+      write('I guess that the plant is:'),  
+
+      write(What_is_plant),  
+
+      nl,  
+
+      undo.  
+
+  
+
+/* plant identification rules */  
+hypothesize(kiwi) :- kiwi, !.  
+hypothesize(grape) :- grape, !.  
+hypothesize(apple) :- apple, !.  
+hypothesize(banana) :- banana, !.  
+hypothesize(carrot) :- carrot, !.  
+hypothesize(orange) :- orange, !.  
+hypothesize(tomato) :- tomato, !.  
+hypothesize(potato) :- potato, !.  
+hypothesize(avocado) :- avocado, !.  
+hypothesize(lettuce) :- lettuce, !. 
+hypothesize(cucumber) :- cucumber, !.  
+hypothesize(eggplant) :- eggplant, !.  
+hypothesize(broccoli) :- broccoli, !. 
+hypothesize(asparagus) :- asparagus, !.  
+hypothesize(strawberry) :- strawberry, !.  
+hypothesize(unknown).  
+
+  
+
+  
+
+/* plant identification rules */  
+apple :- fruit, has_skin, sweet_taste, red_or_green_color,  
+         verify(is_it_commonly_used_in_pies),  
+         verify(is_it_a_source_of_vitamin_C),  
+         verify(is_it_grown_on_trees),  
+         verify(does_it_have_a_flower_blossom).  
+
+banana :- fruit, has_skin, sweet_taste, yellow_color,  
+           verify(is_it_peeled_before_eating),  
+           verify(is_it_a_good_source_of_potassium),  
+           verify(does_it_have_a_soft_texture),  
+           verify(is_it_high_in_fiber).  
+
+grape :- fruit, has_skin, sweet_taste, purple_or_green_color,  
+           verify(grows_in_clusters),  
+           verify(is_it_used_to_make_wine),  
+           verify(does_it_have_antioxidant_properties),  
+           verify(does_it_have_a_single_seed).  
+
+orange :- fruit, has_skin, sweet_taste, orange_color,  
+            verify(is_it_citrus),  
+            verify(is_it_a_good_source_of_vitamin_C),  
+            verify(does_it_have_a_strong_orange_scent),  
+            verify(is_it_used_in_beverages).  
+
+tomato :- fruit, has_skin, juicy_texture, red_color,  
+            verify(is_it_commonly_used_in_salads),  
+            verify(is_it_a_key_ingredient_in_pizza),  
+            verify(does_it_change_color_when_ripe),  
+            verify(does_it_belong_to_the_nightshade_family). 
+
+avocado :- fruit, has_skin, creamy_texture, green_color,  
+             verify(is_it_high_in_healthy_fats),  
+             verify(is_it_used_in_guacamole),  
+             verify(does_it_continue_to_ripen_after_harvest),  
+             verify(does_it_have_a_large_seed).  
+
+kiwi :- fruit, has_skin, tangy_taste, brown_color,  
+            verify(has_small_black_seeds),  
+            verify(is_it_high_in_vitamin_C),  
+            verify(does_it_have_fuzzy_brown_skin),  
+            verify(does_it_belong_to_the_oxalidaceae_family).   
+
+strawberry :- fruit, no_skin, sweet_taste, red_color,  
+               verify(has_small_seeds_on_the_surface),  
+               verify(is_it_used_in_desserts),  
+               verify(does_it_have_heart-shaped_leaves),  
+               verify(does_it_belong_to_the_rosaceae_family).  
+
+carrot :- vegetable, has_skin, crunchy_texture, orange_color,  
+           verify(is_it_long_and_tapered),  
+           verify(is_it_a_good_source_of_beta_carotene),  
+           verify(does_it_have_a_distinctive_carrot_smell),  
+           verify(does_it_belong_to_the_umbelliferous_family).  
+
+cucumber :- vegetable, has_skin, crunchy_texture, green_color,  
+              verify(is_it_high_in_water_content),  
+              verify(is_it_used_in_salads),  
+              verify(does_it_have_small_seeds),  
+              verify(is_it_a_vine_plant).  
+
+potato :- vegetable, has_skin, starchy_texture, brown_color,  
+            verify(is_it_a_common_staple_food),  
+            verify(is_it_used_to_make_fries),  
+            verify(does_it_have_compound_leaves),  
+            verify(is_it_tuberous).  
+
+eggplant :- vegetable, has_skin, spongy_texture, purple_color,  
+              verify(is_it_used_in_mediterranean_cuisine),  
+              verify(is_it_high_in_dietary_fiber),  
+              verify(does_it_have_a_capsule-like_shape),  
+              verify(does_it_belong_to_the_nightshade_family).  
+
+lettuce :- vegetable, no_skin, crisp_texture, green_color,  
+               verify(is_it_a_common_base_for_salads),  
+               verify(is_it_low_in_calories),  
+               verify(does_it_have_a_mild_flavor),  
+               verify(does_it_have_loose_leaves).  
+
+broccoli :- vegetable, no_skin, crunchy_texture, green_color,  
+              verify(has_cluster-like_head),  
+              verify(is_it_a_cruciferous_vegetable),  
+              verify(does_it_have_large_flower_heads),  
+              verify(does_it_need_cool_weather_to_grow).  
+
+asparagus :- vegetable, no_skin, tender_texture, green_color,  
+                verify(has_spear-like_appearance),  
+                verify(is_it_high_in_folate),  
+                verify(does_it_have_cladodes),  
+                verify(does_it_belong_to_the_asparagaceae_family).  
+
+
+
+/* classification rules */  
+fruit :- verify(is_it_fruit), !.  
+vegetable :- verify(is_it_vegetable), !. 
+no_skin :- verify(does_it_have_no_skin), !.  
+has_skin :- verify(does_it_have_skin), !.  
+sweet_taste :- verify(does_it_have_a_sweet_taste), !. 
+tangy_taste :- verify(does_it_have_a_tangy_taste), !.  
+crisp_texture :- verify(is_it_crisp_in_texture), !.  
+juicy_texture :- verify(does_it_have_a_juicy_texture), !.  
+spongy_texture :- verify(is_it_spongy_in_texture), !.  
+tender_texture :- verify(is_it_tender_in_texture), !.  
+creamy_texture :- verify(is_it_creamy_in_texture), !.  
+starchy_texture :- verify(is_it_starchy_in_texture), !. 
+crunchy_texture :- verify(does_it_have_a_crunchy_texture), !.  
+red_color :- verify(is_it_red_color), !. 
+green_color :- verify(is_it_green_in_color), !.  
+brown_color :- verify(is_it_brown_color), !.  
+yellow_color :- verify(is_it_yellow_in_color), !.  
+orange_color :- verify(is_it_orange_in_color), !.  
+purple_color :- verify(is_it_purple_color), !.  
+red_or_green_color :- verify(is_it_red_or_green_color), !.  
+purple_or_green_color :- verify(is_it_purple_or_green_color), !.  
+  
+
+
+/* how to ask questions */  
+ask(Question) :-  
+   write('Does the plant have the following attribute: '),  
+   write(Question),  
+   write('? '),  
+   read(Response),  
+   nl,  
+   ( (Response == yes ; Response == y)  
+   ->  
+   assert(yes(Question)) ;  
+   assert(no(Question)), fail).  
+:- dynamic yes/1,no/1. /* In Prolog, a procedure is either static or dynamic. A static 
+procedure is one whose facts/rules are predefined at the start of 
+execution, and do not change during execution. Normally, the 
+facts/rules will be in a file of Prolog code which will be loaded during 
+the Prolog session. Sometimes, you might want to add extra facts 
+(or maybe even extra rules) to the procedure, during execution of a 
+Prolog query, using assert/asserta/assertz", or maybe remove 
+facts/rules using retract/retractall. To do this, you must declare the 
+procedure to be dynamic. */  
+
+
+
+/* How to verify something */  
+verify(S) :-  
+    (yes(S)  
+    ->  
+    true ;  
+    (no(S)  
+    ->  
+    fail ;  
+    ask(S))).  
+
+
+
+/* undo all yes/no assertions */  
+undo :- retract(yes(_)),fail.  
+undo :- retract(no(_)),fail.  
+undo. 
